@@ -6,7 +6,6 @@ import os
 # Prod URL format: postgresql+asyncpg://user:password@host:5432/dbname
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+asyncpg://postgres:postgres@localhost:5432/clinic_db"
 )
 
 engine = create_async_engine(
