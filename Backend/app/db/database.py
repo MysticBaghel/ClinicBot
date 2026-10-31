@@ -1,12 +1,16 @@
+
+from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 import os
 
-# PostgreSQL on prod, SQLite locally for quick dev
-# Prod URL format: postgresql+asyncpg://user:password@host:5432/dbname
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-)
+# Load environment variables from Backend/.env
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is missing. Check Backend/.env")
 
 engine = create_async_engine(
     DATABASE_URL,
